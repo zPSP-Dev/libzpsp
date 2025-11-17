@@ -78,7 +78,8 @@ comptime {
         asm(macro.import_function("sceNetInet", "0x05038FC7", "sceNetInetSendto_stub"));
         asm(macro.generic_abi_wrapper("sceNetInetSendto", 6));
         asm(macro.import_function("sceNetInet", "0x774E36F4", "sceNetInetSendmsg"));
-        asm(macro.import_function("sceNetInet", "0x2FE71FE7", "sceNetInetSetsockopt"));
+        asm(macro.import_function("sceNetInet", "0x2FE71FE7", "sceNetInetSetsockopt_stub"));
+        asm(macro.generic_abi_wrapper("sceNetInetSetsockopt", 5));
         asm(macro.import_function("sceNetInet", "0x4CFE4E56", "sceNetInetShutdown"));
         asm(macro.import_function("sceNetInet", "0x8B7B220F", "sceNetInetSocket"));
         asm(macro.import_function("sceNetInet", "0x80A21ABD", "sceNetInetSocketAbort"));
