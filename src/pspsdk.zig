@@ -73,7 +73,7 @@ pub const ScePspDateTime = types.ScePspDateTime;
 
 const EMPTY = struct {};
 
-const scePower = struct {
+const scePower_internal = struct {
     pub extern fn scePowerGetWlanActivity() callconv(.C) void;
 
     pub extern fn scePowerGetBacklightMaximum() callconv(.C) void;
@@ -241,9 +241,9 @@ const scePower = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "scePower") and options.scePower)) scePower else EMPTY;
+pub const scePower = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "scePower") and options.scePower)) scePower_internal else EMPTY;
 
-const sceNetInet = struct {
+const sceNetInet_internal = struct {
     pub extern fn sceNetInetInit() callconv(.C) c_int;
 
     pub extern fn sceNetInetTerm() callconv(.C) c_int;
@@ -306,9 +306,9 @@ const sceNetInet = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetInet") and options.sceNetInet)) sceNetInet else EMPTY;
+pub const sceNetInet = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetInet") and options.sceNetInet)) sceNetInet_internal else EMPTY;
 
-const sceNetApctl = struct {
+const sceNetApctl_internal = struct {
     /// Init the apctl.
     /// `stackSize` - The stack size of the internal thread.
     /// `initPriority` - The priority of the internal thread.
@@ -352,9 +352,9 @@ const sceNetApctl = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetApctl") and options.sceNetApctl)) sceNetApctl else EMPTY;
+pub const sceNetApctl = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetApctl") and options.sceNetApctl)) sceNetApctl_internal else EMPTY;
 
-const sceHttp = struct {
+const sceHttp_internal = struct {
     /// Get http request response length.
     /// `requestid` - ID of the request created by sceHttpCreateRequest or sceHttpCreateRequestWithURL
     /// `contentlength` - The size of the content
@@ -651,9 +651,9 @@ const sceHttp = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceHttp") and options.sceHttp)) sceHttp else EMPTY;
+pub const sceHttp = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceHttp") and options.sceHttp)) sceHttp_internal else EMPTY;
 
-const sceNet = struct {
+const sceNet_internal = struct {
     /// Initialise the networking library
     /// `poolsize` - Memory pool size (appears to be for the whole of the networking library).
     /// `calloutprio` - Priority of the SceNetCallout thread.
@@ -699,9 +699,9 @@ const sceNet = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNet") and options.sceNet)) sceNet else EMPTY;
+pub const sceNet = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNet") and options.sceNet)) sceNet_internal else EMPTY;
 
-const sceNetResolver = struct {
+const sceNetResolver_internal = struct {
     /// Inititalise the resolver library
     /// Returns 0 on sucess, < 0 on error.
     pub extern fn sceNetResolverInit() callconv(.C) c_int;
@@ -748,9 +748,9 @@ const sceNetResolver = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetResolver") and options.sceNetResolver)) sceNetResolver else EMPTY;
+pub const sceNetResolver = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetResolver") and options.sceNetResolver)) sceNetResolver_internal else EMPTY;
 
-const sceNet_lib = struct {
+const sceNet_lib_internal = struct {
     pub extern fn sceNet_lib_3B617AA0() callconv(.C) void;
 
     pub extern fn sceNet_lib_DB88F458() callconv(.C) void;
@@ -945,9 +945,9 @@ const sceNet_lib = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNet_lib") and options.sceNet_lib)) sceNet_lib else EMPTY;
+pub const sceNet_lib = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNet_lib") and options.sceNet_lib)) sceNet_lib_internal else EMPTY;
 
-const sceNetAdhocctl = struct {
+const sceNetAdhocctl_internal = struct {
     /// Initialise the Adhoc control library
     /// `stacksize` - Stack size of the adhocctl thread. Set to 0x2000
     /// `priority` - Priority of the adhocctl thread. Set to 0x30
@@ -1069,9 +1069,9 @@ const sceNetAdhocctl = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetAdhocctl") and options.sceNetAdhocctl)) sceNetAdhocctl else EMPTY;
+pub const sceNetAdhocctl = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetAdhocctl") and options.sceNetAdhocctl)) sceNetAdhocctl_internal else EMPTY;
 
-const sceNetAdhocMatching = struct {
+const sceNetAdhocMatching_internal = struct {
     /// Initialise the Adhoc matching library
     /// `memsize` - Internal memory pool size. Lumines uses 0x20000
     /// Returns 0 on success, < 0 on error
@@ -1183,9 +1183,9 @@ const sceNetAdhocMatching = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetAdhocMatching") and options.sceNetAdhocMatching)) sceNetAdhocMatching else EMPTY;
+pub const sceNetAdhocMatching = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetAdhocMatching") and options.sceNetAdhocMatching)) sceNetAdhocMatching_internal else EMPTY;
 
-const sceNetAdhoc = struct {
+const sceNetAdhoc_internal = struct {
     /// Initialise the adhoc library.
     /// Returns 0 on success, < 0 on error
     pub extern fn sceNetAdhocInit() callconv(.C) c_int;
@@ -1352,9 +1352,9 @@ const sceNetAdhoc = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetAdhoc") and options.sceNetAdhoc)) sceNetAdhoc else EMPTY;
+pub const sceNetAdhoc = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceNetAdhoc") and options.sceNetAdhoc)) sceNetAdhoc_internal else EMPTY;
 
-const sceSsl = struct {
+const sceSsl_internal = struct {
     pub extern fn sceSslGetNameEntryCount() callconv(.C) void;
 
     /// Get the current memory size used by ssl.
@@ -1390,9 +1390,9 @@ const sceSsl = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceSsl") and options.sceSsl)) sceSsl else EMPTY;
+pub const sceSsl = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceSsl") and options.sceSsl)) sceSsl_internal else EMPTY;
 
-const sceJpeg = struct {
+const sceJpeg_internal = struct {
     pub extern fn sceJpeg_0425B986() callconv(.C) void;
 
     pub extern fn sceJpegMJpegCsc() callconv(.C) void;
@@ -1438,9 +1438,9 @@ const sceJpeg = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceJpeg") and options.sceJpeg)) sceJpeg else EMPTY;
+pub const sceJpeg = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceJpeg") and options.sceJpeg)) sceJpeg_internal else EMPTY;
 
-const sceMpegbase = struct {
+const sceMpegbase_internal = struct {
     pub extern fn sceMpegBaseYCrCbCopyVme(YUVBuffer: ScePVoid, Buffer: [*c]SceInt32, Type: SceInt32) callconv(.C) SceInt32;
 
     pub extern fn sceMpegBaseCscInit(width: SceInt32) callconv(.C) SceInt32;
@@ -1461,9 +1461,9 @@ const sceMpegbase = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceMpegbase") and options.sceMpegbase)) sceMpegbase else EMPTY;
+pub const sceMpegbase = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceMpegbase") and options.sceMpegbase)) sceMpegbase_internal else EMPTY;
 
-const sceMpeg = struct {
+const sceMpeg_internal = struct {
     /// sceMpegQueryStreamOffset
     /// `Mpeg` - SceMpeg handle
     /// `pBuffer` - pointer to file header
@@ -1651,9 +1651,9 @@ const sceMpeg = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceMpeg") and options.sceMpeg)) sceMpeg else EMPTY;
+pub const sceMpeg = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceMpeg") and options.sceMpeg)) sceMpeg_internal else EMPTY;
 
-const sceHprm = struct {
+const sceHprm_internal = struct {
     pub extern fn sceHprmRegisterCallback() callconv(.C) void;
 
     pub extern fn sceHprmUnregisterCallback() callconv(.C) void;
@@ -1688,9 +1688,9 @@ const sceHprm = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceHprm") and options.sceHprm)) sceHprm else EMPTY;
+pub const sceHprm = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceHprm") and options.sceHprm)) sceHprm_internal else EMPTY;
 
-const sceUmdUser = struct {
+const sceUmdUser_internal = struct {
     /// Get the error code associated with a failed event
     /// Returns < 0 on error, the error code on success
     pub extern fn sceUmdGetErrorStat() callconv(.C) c_int;
@@ -1784,9 +1784,9 @@ const sceUmdUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUmdUser") and options.sceUmdUser)) sceUmdUser else EMPTY;
+pub const sceUmdUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUmdUser") and options.sceUmdUser)) sceUmdUser_internal else EMPTY;
 
-const sceCtrl = struct {
+const sceCtrl_internal = struct {
     /// Set the controller cycle setting.
     /// `cycle` - Cycle.  Normally set to 0.
     /// Returns The previous cycle setting.
@@ -1920,9 +1920,9 @@ const sceCtrl = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceCtrl") and options.sceCtrl)) sceCtrl else EMPTY;
+pub const sceCtrl = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceCtrl") and options.sceCtrl)) sceCtrl_internal else EMPTY;
 
-const LoadExecForUser = struct {
+const LoadExecForUser_internal = struct {
     /// Execute a new game executable, limited when not running in kernel mode.
     /// `file` - The file to execute.
     /// `param` - Pointer to a ::SceKernelLoadExecParam structure, or NULL.
@@ -1950,9 +1950,9 @@ const LoadExecForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "LoadExecForUser") and options.LoadExecForUser)) LoadExecForUser else EMPTY;
+pub const LoadExecForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "LoadExecForUser") and options.LoadExecForUser)) LoadExecForUser_internal else EMPTY;
 
-const Kernel_Library = struct {
+const Kernel_Library_internal = struct {
     /// Suspend all interrupts.
     /// Returns The current state of the interrupt controller, to be used with ::sceKernelCpuResumeIntr().
     pub extern fn sceKernelCpuSuspendIntr() callconv(.C) c_uint;
@@ -1995,9 +1995,9 @@ const Kernel_Library = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "Kernel_Library") and options.Kernel_Library)) Kernel_Library else EMPTY;
+pub const Kernel_Library = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "Kernel_Library") and options.Kernel_Library)) Kernel_Library_internal else EMPTY;
 
-const sceImpose = struct {
+const sceImpose_internal = struct {
     pub extern fn sceImposeGetHomePopup() callconv(.C) void;
 
     pub extern fn sceImposeGetLanguageMode() callconv(.C) void;
@@ -2030,9 +2030,9 @@ const sceImpose = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceImpose") and options.sceImpose)) sceImpose else EMPTY;
+pub const sceImpose = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceImpose") and options.sceImpose)) sceImpose_internal else EMPTY;
 
-const SysMemUserForUser = struct {
+const SysMemUserForUser_internal = struct {
     /// Get the size of the largest free memory block.
     /// Returns The size of the largest free memory block, in bytes.
     pub extern fn sceKernelMaxFreeMemSize() callconv(.C) SceSize;
@@ -2089,9 +2089,9 @@ const SysMemUserForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "SysMemUserForUser") and options.SysMemUserForUser)) SysMemUserForUser else EMPTY;
+pub const SysMemUserForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "SysMemUserForUser") and options.SysMemUserForUser)) SysMemUserForUser_internal else EMPTY;
 
-const sceSuspendForUser = struct {
+const sceSuspendForUser_internal = struct {
     pub extern fn sceKernelPowerLock() callconv(.C) void;
 
     pub extern fn sceKernelPowerUnlock() callconv(.C) void;
@@ -2120,9 +2120,9 @@ const sceSuspendForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceSuspendForUser") and options.sceSuspendForUser)) sceSuspendForUser else EMPTY;
+pub const sceSuspendForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceSuspendForUser") and options.sceSuspendForUser)) sceSuspendForUser_internal else EMPTY;
 
-const ModuleMgrForUser = struct {
+const ModuleMgrForUser_internal = struct {
     /// Load a module from the given file UID.
     /// `fid` - The module's file UID.
     /// `flags` - Unused, always 0.
@@ -2220,9 +2220,9 @@ const ModuleMgrForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "ModuleMgrForUser") and options.ModuleMgrForUser)) ModuleMgrForUser else EMPTY;
+pub const ModuleMgrForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "ModuleMgrForUser") and options.ModuleMgrForUser)) ModuleMgrForUser_internal else EMPTY;
 
-const IoFileMgrForUser = struct {
+const IoFileMgrForUser_internal = struct {
     /// Poll for asyncronous completion.
     /// `fd` - The file descriptor which is current performing an asynchronous action.
     /// `res` - The result of the async action.
@@ -2518,9 +2518,9 @@ const IoFileMgrForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "IoFileMgrForUser") and options.IoFileMgrForUser)) IoFileMgrForUser else EMPTY;
+pub const IoFileMgrForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "IoFileMgrForUser") and options.IoFileMgrForUser)) IoFileMgrForUser_internal else EMPTY;
 
-const UtilsForUser = struct {
+const UtilsForUser_internal = struct {
     /// Invalidate a range of addresses in data cache
     pub extern fn sceKernelDcacheInvalidateRange(p: ?*const anyopaque, size: c_uint) callconv(.C) void;
 
@@ -2648,9 +2648,9 @@ const UtilsForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "UtilsForUser") and options.UtilsForUser)) UtilsForUser else EMPTY;
+pub const UtilsForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "UtilsForUser") and options.UtilsForUser)) UtilsForUser_internal else EMPTY;
 
-const InterruptManager = struct {
+const InterruptManager_internal = struct {
     /// Register a sub interrupt handler.
     /// `intno` - The interrupt number to register.
     /// `no` - The sub interrupt handler number (user controlled)
@@ -2689,9 +2689,9 @@ const InterruptManager = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "InterruptManager") and options.InterruptManager)) InterruptManager else EMPTY;
+pub const InterruptManager = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "InterruptManager") and options.InterruptManager)) InterruptManager_internal else EMPTY;
 
-const ThreadManForUser = struct {
+const ThreadManForUser_internal = struct {
     /// Return from a callback (used as a syscall for the return
     /// of the callback function)
     pub extern fn _sceKernelReturnFromCallback() callconv(.C) void;
@@ -3552,9 +3552,9 @@ const ThreadManForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "ThreadManForUser") and options.ThreadManForUser)) ThreadManForUser else EMPTY;
+pub const ThreadManForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "ThreadManForUser") and options.ThreadManForUser)) ThreadManForUser_internal else EMPTY;
 
-const StdioForUser = struct {
+const StdioForUser_internal = struct {
     pub extern fn sceKernelStdioRead() callconv(.C) void;
 
     pub extern fn sceKernelStdioLseek() callconv(.C) void;
@@ -3581,9 +3581,9 @@ const StdioForUser = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "StdioForUser") and options.StdioForUser)) StdioForUser else EMPTY;
+pub const StdioForUser = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "StdioForUser") and options.StdioForUser)) StdioForUser_internal else EMPTY;
 
-const sceUsbCam = struct {
+const sceUsbCam_internal = struct {
     pub extern fn sceUsbCamSetupMic() callconv(.C) void;
 
     pub extern fn sceUsbCamSetMicGain() callconv(.C) void;
@@ -3819,9 +3819,9 @@ const sceUsbCam = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUsbCam") and options.sceUsbCam)) sceUsbCam else EMPTY;
+pub const sceUsbCam = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUsbCam") and options.sceUsbCam)) sceUsbCam_internal else EMPTY;
 
-const sceUsb = struct {
+const sceUsb_internal = struct {
     /// Start a USB driver.
     /// `driverName` - name of the USB driver to start
     /// `size` - Size of arguments to pass to USB driver start
@@ -3863,9 +3863,9 @@ const sceUsb = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUsb") and options.sceUsb)) sceUsb else EMPTY;
+pub const sceUsb = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUsb") and options.sceUsb)) sceUsb_internal else EMPTY;
 
-const sceDmac = struct {
+const sceDmac_internal = struct {
     /// Copy data in memory using DMAC
     /// `dst` - The pointer to the destination
     /// `src` - The pointer to the source
@@ -3877,9 +3877,9 @@ const sceDmac = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceDmac") and options.sceDmac)) sceDmac else EMPTY;
+pub const sceDmac = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceDmac") and options.sceDmac)) sceDmac_internal else EMPTY;
 
-const sceAudio = struct {
+const sceAudio_internal = struct {
     /// Output audio of the specified channel
     /// `channel` - The channel number.
     /// `vol` - The volume.
@@ -4051,9 +4051,9 @@ const sceAudio = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAudio") and options.sceAudio)) sceAudio else EMPTY;
+pub const sceAudio = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAudio") and options.sceAudio)) sceAudio_internal else EMPTY;
 
-const sceAudiocodec = struct {
+const sceAudiocodec_internal = struct {
     pub extern fn sceAudiocodecCheckNeedMem(Buffer: [*c]c_ulong, Type: c_int) callconv(.C) c_int;
 
     pub extern fn sceAudiocodecInit(Buffer: [*c]c_ulong, Type: c_int) callconv(.C) c_int;
@@ -4072,9 +4072,9 @@ const sceAudiocodec = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAudiocodec") and options.sceAudiocodec)) sceAudiocodec else EMPTY;
+pub const sceAudiocodec = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAudiocodec") and options.sceAudiocodec)) sceAudiocodec_internal else EMPTY;
 
-const sceGe_user = struct {
+const sceGe_user_internal = struct {
     /// Get the size of VRAM.
     /// Returns The size of VRAM (in bytes).
     pub extern fn sceGeEdramGetSize() callconv(.C) c_uint;
@@ -4182,9 +4182,9 @@ const sceGe_user = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceGe_user") and options.sceGe_user)) sceGe_user else EMPTY;
+pub const sceGe_user = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceGe_user") and options.sceGe_user)) sceGe_user_internal else EMPTY;
 
-const sceMp3 = struct {
+const sceMp3_internal = struct {
     /// sceMp3ReserveMp3Handle
     /// `args` - Pointer to SceMp3InitArg structure
     /// Returns sceMp3 handle on success, < 0 on error.
@@ -4313,9 +4313,9 @@ const sceMp3 = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceMp3") and options.sceMp3)) sceMp3 else EMPTY;
+pub const sceMp3 = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceMp3") and options.sceMp3)) sceMp3_internal else EMPTY;
 
-const sceRtc = struct {
+const sceRtc_internal = struct {
     /// Get the resolution of the tick counter
     /// Returns # of ticks per second
     pub extern fn sceRtcGetTickResolution() callconv(.C) u32;
@@ -4497,9 +4497,9 @@ const sceRtc = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceRtc") and options.sceRtc)) sceRtc else EMPTY;
+pub const sceRtc = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceRtc") and options.sceRtc)) sceRtc_internal else EMPTY;
 
-const sceVaudio = struct {
+const sceVaudio_internal = struct {
     /// Output audio (blocking)
     /// `volume` - It must be a value between 0 and ::PSP_VAUDIO_VOLUME_MAX
     /// `buffer` - Pointer to the PCM data to output.
@@ -4538,9 +4538,9 @@ const sceVaudio = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceVaudio") and options.sceVaudio)) sceVaudio else EMPTY;
+pub const sceVaudio = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceVaudio") and options.sceVaudio)) sceVaudio_internal else EMPTY;
 
-const sceReg = struct {
+const sceReg_internal = struct {
     pub extern fn sceRegExit() callconv(.C) void;
 
     /// Open the registry
@@ -4659,9 +4659,9 @@ const sceReg = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceReg") and options.sceReg)) sceReg else EMPTY;
+pub const sceReg = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceReg") and options.sceReg)) sceReg_internal else EMPTY;
 
-const sceWlanDrv_lib = struct {
+const sceWlanDrv_lib_internal = struct {
     /// Attach to the wlan device
     /// Returns 0 on success, < 0 on error.
     pub extern fn sceWlanDevAttach() callconv(.C) c_int;
@@ -4704,9 +4704,9 @@ const sceWlanDrv_lib = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceWlanDrv_lib") and options.sceWlanDrv_lib)) sceWlanDrv_lib else EMPTY;
+pub const sceWlanDrv_lib = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceWlanDrv_lib") and options.sceWlanDrv_lib)) sceWlanDrv_lib_internal else EMPTY;
 
-const sceWlanDrv = struct {
+const sceWlanDrv_internal = struct {
     /// Determine if the wlan device is currently powered on
     /// Returns 0 if off, 1 if on
     pub extern fn sceWlanDevIsPowerOn() callconv(.C) c_int;
@@ -4723,16 +4723,16 @@ const sceWlanDrv = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceWlanDrv") and options.sceWlanDrv)) sceWlanDrv else EMPTY;
+pub const sceWlanDrv = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceWlanDrv") and options.sceWlanDrv)) sceWlanDrv_internal else EMPTY;
 
-const sceOpenPSID = struct {
+const sceOpenPSID_internal = struct {
     pub extern fn sceOpenPSIDGetOpenPSID(openpsid: [*c]c_int) callconv(.C) c_int;
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceOpenPSID") and options.sceOpenPSID)) sceOpenPSID else EMPTY;
+pub const sceOpenPSID = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceOpenPSID") and options.sceOpenPSID)) sceOpenPSID_internal else EMPTY;
 
-const sceDisplay = struct {
+const sceDisplay_internal = struct {
     /// Set display mode
     /// @par Example1:
     /// `
@@ -4806,9 +4806,9 @@ const sceDisplay = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceDisplay") and options.sceDisplay)) sceDisplay else EMPTY;
+pub const sceDisplay = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceDisplay") and options.sceDisplay)) sceDisplay_internal else EMPTY;
 
-const sceAtrac3plus = struct {
+const sceAtrac3plus_internal = struct {
     pub extern fn sceAtracStartEntry() callconv(.C) void;
 
     pub extern fn sceAtracEndEntry() callconv(.C) void;
@@ -4904,16 +4904,16 @@ const sceAtrac3plus = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAtrac3plus") and options.sceAtrac3plus)) sceAtrac3plus else EMPTY;
+pub const sceAtrac3plus = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAtrac3plus") and options.sceAtrac3plus)) sceAtrac3plus_internal else EMPTY;
 
-const sceUsbstor = struct {
+const sceUsbstor_internal = struct {
     pub extern fn sceUsbstorGetStatus() callconv(.C) void;
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUsbstor") and options.sceUsbstor)) sceUsbstor else EMPTY;
+pub const sceUsbstor = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUsbstor") and options.sceUsbstor)) sceUsbstor_internal else EMPTY;
 
-const sceUtility = struct {
+const sceUtility_internal = struct {
     /// Init the game sharing
     /// `params` - game sharing parameters
     /// Returns 0 on success, < 0 on error.
@@ -5156,9 +5156,9 @@ const sceUtility = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUtility") and options.sceUtility)) sceUtility else EMPTY;
+pub const sceUtility = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUtility") and options.sceUtility)) sceUtility_internal else EMPTY;
 
-const sceUtility_netparam_internal = struct {
+const sceUtility_netparam_internal_internal = struct {
     /// Create a new Network Configuration
     /// @note This creates a new configuration at conf and clears 0
     /// `conf` - Net Configuration number (1 to n)
@@ -5185,5 +5185,5 @@ const sceUtility_netparam_internal = struct {
 
 };
 
-pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUtility_netparam_internal") and options.sceUtility_netparam_internal)) sceUtility_netparam_internal else EMPTY;
+pub const sceUtility_netparam_internal = if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceUtility_netparam_internal") and options.sceUtility_netparam_internal)) sceUtility_netparam_internal_internal else EMPTY;
 
