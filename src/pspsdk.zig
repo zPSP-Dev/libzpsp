@@ -1925,9 +1925,9 @@ const sceCtrl = struct {
     /// @see ::sceCtrlPeekLatch()
     pub extern fn sceCtrlReadLatch(latch_data: [*c]c_int) callconv(.C) c_int;
 
-    pub extern fn sceCtrl_348D99D4() callconv(.C) void;
+    pub extern fn sceCtrlSetSuspendingExtraSamples() callconv(.C) void;
 
-    pub extern fn sceCtrl_AF5960F3() callconv(.C) void;
+    pub extern fn sceCtrlGetSuspendingExtraSamples() callconv(.C) void;
 
     pub extern fn sceCtrlClearRapidFire() callconv(.C) void;
 
@@ -3923,7 +3923,7 @@ const sceAudio = struct {
     /// `channel` - The channel number.
     /// `vol` - The volume.
     /// `buf` - Pointer to the PCM data to output.
-    /// Returns 0 on success, an error if less than 0.
+    /// Returns number of queued samples on success, an error if less than 0.
     pub extern fn sceAudioOutputBlocking(channel: c_int, vol: c_int, buf: ?*anyopaque) callconv(.C) c_int;
 
     /// Output panned audio of the specified channel
@@ -3939,7 +3939,7 @@ const sceAudio = struct {
     /// `leftvol` - The left volume.
     /// `rightvol` - The right volume.
     /// `buf` - Pointer to the PCM data to output.
-    /// Returns 0 on success, an error if less than 0.
+    /// Returns number of queued samples on success, an error if less than 0.
     pub extern fn sceAudioOutputPannedBlocking(channel: c_int, leftvol: c_int, rightvol: c_int, buf: ?*anyopaque) callconv(.C) c_int;
 
     /// Allocate and initialize a hardware output channel.
@@ -3998,7 +3998,7 @@ const sceAudio = struct {
     /// Output audio
     /// `vol` - The volume.
     /// `buf` - Pointer to the PCM data to output.
-    /// Returns 0 on success, an error if less than 0.
+    /// Returns number of queued samples on success, an error if less than 0.
     pub extern fn sceAudioSRCOutputBlocking(vol: c_int, buf: ?*anyopaque) callconv(.C) c_int;
 
     /// Perform audio input (blocking)

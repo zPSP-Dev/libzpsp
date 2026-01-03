@@ -536,8 +536,8 @@ comptime {
         asm(macro.import_function("sceCtrl", "0x60B81F86", "sceCtrlReadBufferNegative"));
         asm(macro.import_function("sceCtrl", "0xB1D0E5CD", "sceCtrlPeekLatch"));
         asm(macro.import_function("sceCtrl", "0x0B588501", "sceCtrlReadLatch"));
-        asm(macro.import_function("sceCtrl", "0x348D99D4", "sceCtrl_348D99D4"));
-        asm(macro.import_function("sceCtrl", "0xAF5960F3", "sceCtrl_AF5960F3"));
+        asm(macro.import_function("sceCtrl", "0x348D99D4", "sceCtrlSetSuspendingExtraSamples"));
+        asm(macro.import_function("sceCtrl", "0xAF5960F3", "sceCtrlGetSuspendingExtraSamples"));
         asm(macro.import_function("sceCtrl", "0xA68FD260", "sceCtrlClearRapidFire"));
         asm(macro.import_function("sceCtrl", "0x6841BE1A", "sceCtrlSetRapidFire"));
         asm(macro.import_function("sceCtrl", "0xA7144800", "sceCtrlSetIdleCancelThreshold"));
