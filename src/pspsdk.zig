@@ -3616,7 +3616,7 @@ const StdioForUser = struct {
 pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "StdioForUser") and options.StdioForUser)) StdioForUser else EMPTY;
 
 const sceUsbCam = struct {
-    pub extern fn sceUsbCamSetupMic() callconv(.C) void;
+    pub extern fn sceUsbCamSetupMic(param: ?*anyopaque, workarea: ?*anyopaque, wasize: c_int) callconv(.C) c_int;
 
     pub extern fn sceUsbCamSetMicGain() callconv(.C) void;
 
