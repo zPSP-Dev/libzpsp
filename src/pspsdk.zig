@@ -2723,6 +2723,27 @@ const InterruptManager = struct {
 
 pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "InterruptManager") and options.InterruptManager)) InterruptManager else EMPTY;
 
+const sceAudioRouting = struct {
+    /// Returns The current routing volume mode.
+    pub extern fn sceAudioRoutingGetVolumeMode() callconv(.C) c_int;
+
+    /// Set routing mode.
+    /// `mode The routing mode to set (0 or 1)`
+    /// Returns the previous routing mode, or < 0 on error
+    pub extern fn sceAudioRoutingSetMode(mode: c_int) callconv(.C) c_int;
+
+    /// Get routing mode.
+    /// Returns the current routing mode.
+    pub extern fn sceAudioRoutingGetMode() callconv(.C) c_int;
+
+    /// `vol_mode The routing volume to set (`0` or `1`).`
+    /// Returns `0` on success, `< 0` on error.
+    pub extern fn sceAudioRoutingSetVolumeMode(vol_mode: c_int) callconv(.C) c_int;
+
+};
+
+pub usingnamespace if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAudioRouting") and options.sceAudioRouting)) sceAudioRouting else EMPTY;
+
 const ThreadManForUser = struct {
     /// Return from a callback (used as a syscall for the return
     /// of the callback function)

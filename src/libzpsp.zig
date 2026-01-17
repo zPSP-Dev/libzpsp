@@ -712,6 +712,14 @@ comptime {
         asm(macro.import_function("InterruptManager", "0xEEE43F47", "sceKernelRegisterUserSpaceIntrStack"));
     }
 
+    if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "sceAudioRouting") and options.sceAudioRouting)) {
+        asm(macro.import_module_start("sceAudioRouting", "0x40010000", "4"));
+        asm(macro.import_function("sceAudioRouting", "0x28235C56", "sceAudioRoutingGetVolumeMode"));
+        asm(macro.import_function("sceAudioRouting", "0x36FD8AA9", "sceAudioRoutingSetMode"));
+        asm(macro.import_function("sceAudioRouting", "0x39240E7D", "sceAudioRoutingGetMode"));
+        asm(macro.import_function("sceAudioRouting", "0xBB548475", "sceAudioRoutingSetVolumeMode"));
+    }
+
     if ((@hasDecl(options, "everything") and options.everything) or (@hasDecl(options, "ThreadManForUser") and options.ThreadManForUser)) {
         asm(macro.import_module_start("ThreadManForUser", "0x40010000", "128"));
         asm(macro.import_function("ThreadManForUser", "0x6E9EA350", "_sceKernelReturnFromCallback"));

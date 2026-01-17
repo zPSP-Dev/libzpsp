@@ -28,6 +28,7 @@ pub const Options = struct {
     IoFileMgrForUser: bool = false,
     UtilsForUser: bool = false,
     InterruptManager: bool = false,
+    sceAudioRouting: bool = false,
     ThreadManForUser: bool = false,
     StdioForUser: bool = false,
     sceUsbCam: bool = false,
@@ -82,6 +83,7 @@ pub fn addOptions(b: *std.Build, options: Options) *std.Build.Step.Options {
     step_options.addOption(bool, "IoFileMgrForUser", options.IoFileMgrForUser);
     step_options.addOption(bool, "UtilsForUser", options.UtilsForUser);
     step_options.addOption(bool, "InterruptManager", options.InterruptManager);
+    step_options.addOption(bool, "sceAudioRouting", options.sceAudioRouting);
     step_options.addOption(bool, "ThreadManForUser", options.ThreadManForUser);
     step_options.addOption(bool, "StdioForUser", options.StdioForUser);
     step_options.addOption(bool, "sceUsbCam", options.sceUsbCam);
